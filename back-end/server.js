@@ -51,7 +51,13 @@ async function RegistrarMusica(titulo, duracao, artista, url) {
     await db.run(`INSERT INTO musicas (titulo, duracao, artista, url) VALUES (?, ?, ?, ?)`, [titulo, duracao, artista, url]);
 }
 
+async function RegistrarUsuario(nome, email, senha) {
+    const db = await ConectarBanco();
+
+    await db.run(`INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)`, [nome, email, senha]);
+}
+
 RegistrarMusica('Smooth Criminal', '4:17', 'Michael Jackson', 'musica4.mp3');
+RegistrarUsuario('Iguinho', 'junglekui@gmail.com', '123456');
 
 IniciarBanco();
-

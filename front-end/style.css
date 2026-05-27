@@ -1,0 +1,19 @@
+/* Estilo para o corpo da página */
+body {
+  background-color: black;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Estilo para o título */
+.Titulo {
+  font-size: 70px;
+  font-family: "Arimo", sans-serif;
+}
+
+.arimo-Titulo {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
