@@ -10,10 +10,17 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Esse codigo faz o banco de dados sair da pasta back-end e ir pra pasta do front-end
-//app.use(express.sqlite3(path.join(__dirname, '../front-end')));
+app.use(express.sqlite3(path.join(__dirname, '../front-end')));
 
 // Esse codigo leva a pastas de musicas com mp3 para o front-end
-//app.use('/musicas', express.static(path.join(__dirname, 'musicas')));
+app.use('/musicas', express.static(path.join(__dirname, 'musicas')));
+
+// Pegar a lisa de Musicas do banco de dados e enviar para o front-end
+app.get('/api/musicas', async (req, res) => {
+    const db = await ConectarBanco();
+    const listaDeMusicas = await db.all(`SELECT * FROM musicas`);
+    res.json(listaDeMusicas);
+});
 
 // Função para conectar ao banco de dados e retornar a conexão
 async function ConectarBanco() {
@@ -51,6 +58,7 @@ async function RegistrarMusica(titulo, duracao, artista, url) {
     await db.run(`INSERT INTO musicas (titulo, duracao, artista, url) VALUES (?, ?, ?, ?)`, [titulo, duracao, artista, url]);
 }
 
+// Função para registrar um novo usuario no banco de dados
 async function RegistrarUsuario(nome, email, senha) {
     const db = await ConectarBanco();
 
